@@ -19,8 +19,9 @@ public class Application {
 	public static void main(String[] args) {
 		
 		if(args.length != 1) {
-			LOGGER.log(Level.SEVERE, "Input file with list of topics and durations as argument expected");
-			System.exit(1);
+			String msg = "Input file with list of topics and durations as argument expected";
+			LOGGER.log(Level.SEVERE, msg);
+			throw new RuntimeException(msg);
 		}
 		
 	}
