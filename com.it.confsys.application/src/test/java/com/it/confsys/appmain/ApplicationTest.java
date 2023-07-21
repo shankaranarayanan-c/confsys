@@ -2,10 +2,10 @@ package com.it.confsys.appmain;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.it.confsys.handlers.LoggerHandler;
@@ -22,7 +22,10 @@ public class ApplicationTest {
 	
 	@Test
 	public void testMainPostive() {
-		String[] args = {"pathToInputFile"};
+		String filepath = this.getClass().getResource("/confsys_input_valid.txt").getFile();
+		File inputFile = new File(filepath);
+		
+		String[] args = {inputFile.getAbsolutePath()};
  		Application.main(args);
  		
  		assertEquals(0, loggerHandler.getLogRecords().size());
