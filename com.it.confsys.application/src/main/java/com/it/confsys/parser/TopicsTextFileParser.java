@@ -56,14 +56,14 @@ public class TopicsTextFileParser extends FileParser {
 				if(durationExtract.length() > 0) {
 				int value = Integer.parseInt(durationExtract.toString());
 					if(value > 0 && value <= 60) {
-						LOGGER.log(Level.INFO, "valid topic with duration: ", line);
+						LOGGER.log(Level.INFO, "valid topic with duration: " + line);
 					}else {
 						LOGGER.log(Level.WARNING, "Ignored topic with invalid duration. " + line);
 					}
 				}else {
 					//Lightning duration
 					if(line.toLowerCase().contains("lightning")) {
-						LOGGER.log(Level.INFO, "valid topic with duration: ", line);
+						LOGGER.log(Level.INFO, "valid topic with duration: " + line);
 					}else {
 						// invalid topic without duration
 						LOGGER.log(Level.WARNING, "Ignored topic without valid duration. " + line);
