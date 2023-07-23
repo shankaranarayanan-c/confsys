@@ -3,6 +3,8 @@
  */
 package com.it.confsys.parser;
 
+import com.it.confsys.model.InputData;
+
 /**
  * 
  */
@@ -14,6 +16,11 @@ public abstract class FileParser {
 		this.filePath = inputFilePath;
 	}
 	
-	public abstract void parse();
+	/**
+	 * Parse the input file and returns the valid data found in the files.
+	 * 
+	 * @return {@link InputData}
+	 */
+	public abstract InputData parse();
 
 }

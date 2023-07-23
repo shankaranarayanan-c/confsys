@@ -11,6 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import com.it.confsys.model.ConferenceTopics;
+import com.it.confsys.model.InputData;
+import com.it.confsys.util.AppConstants;
+
 /**
  * 
  */
@@ -24,7 +28,7 @@ public class TopicsTextFileParser extends FileParser {
 	}
 
 	@Override
-	public void parse() {
+	public InputData parse() {
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = new FileInputStream(this.filePath);
@@ -36,6 +40,7 @@ public class TopicsTextFileParser extends FileParser {
 		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
 		BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 		String line;
+		ConferenceTopics conferenceTopics = new ConferenceTopics();
 		try {
 			while((line = bufferedReader.readLine()) != null) {
 				
@@ -57,6 +62,7 @@ public class TopicsTextFileParser extends FileParser {
 				int value = Integer.parseInt(durationExtract.toString());
 					if(value > 0 && value <= 60) {
 						LOGGER.log(Level.INFO, "valid topic with duration: " + line);
+						conferenceTopics.addTopic(value, line);
 					}else {
 						LOGGER.log(Level.WARNING, "Ignored topic with invalid duration. " + line);
 					}
@@ -64,6 +70,7 @@ public class TopicsTextFileParser extends FileParser {
 					//Lightning duration
 					if(line.toLowerCase().contains("lightning")) {
 						LOGGER.log(Level.INFO, "valid topic with duration: " + line);
+						conferenceTopics.addTopic(AppConstants.LIGHTNING_DURATION, line);
 					}else {
 						// invalid topic without duration
 						LOGGER.log(Level.WARNING, "Ignored topic without valid duration. " + line);
@@ -75,6 +82,7 @@ public class TopicsTextFileParser extends FileParser {
 			LOGGER.log(Level.SEVERE, "Unable to read input file. " + filePath);
 			throw new RuntimeException(e.getMessage());
 		}
+		return conferenceTopics;
 	}
 
 }
