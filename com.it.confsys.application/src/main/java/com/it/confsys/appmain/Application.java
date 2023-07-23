@@ -6,6 +6,7 @@ package com.it.confsys.appmain;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.it.confsys.model.InputData;
 import com.it.confsys.parser.FileParser;
 import com.it.confsys.parser.TopicsTextFileParser;
 
@@ -27,10 +28,8 @@ public class Application {
 			throw new RuntimeException(msg);
 		}
 		
-		
 		FileParser fileParser = new TopicsTextFileParser(args[0]);
-		fileParser.parse();
-		
+		InputData parseData = fileParser.parse();
 	}
 
 }
