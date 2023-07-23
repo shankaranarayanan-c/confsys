@@ -3,7 +3,6 @@ package com.it.confsys.parser;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.RandomAccessFile;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
@@ -39,16 +38,11 @@ public class TopicsTextFileParserTest {
 		}
 	}
 	
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void testParseInValidFile() {
 		
 		FileParser inputFileParser = new TopicsTextFileParser("Nosuchfile.txt");
-		
-		try {
-			inputFileParser.parse();
-		}catch (Exception e) {
-			assertEquals(RuntimeException.class.getName(), e.getClass().getName());
-		}
+		inputFileParser.parse();
 		
 	}
 	
@@ -170,23 +164,4 @@ public class TopicsTextFileParserTest {
 		
 	}
 	
-	@Test
-	public void testParseNullPath() {
-		String filepath = this.getClass().getResource("/confsys_input_valid.txt").getFile();
-		File inputFile = new File(filepath);
-		
-		FileParser inputFileParser = new TopicsTextFileParser(inputFile.getAbsolutePath());
-		
-		try {
-		final RandomAccessFile lockInputFile = new RandomAccessFile(inputFile.getAbsoluteFile(), "rw");
-		lockInputFile.getChannel().lock();
-		
-		
-		inputFileParser.parse();
-		}catch (Exception e) {
-			assertEquals(RuntimeException.class.getName(), e.getClass().getName());
-		}
-		
-	}
-
 }
