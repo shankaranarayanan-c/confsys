@@ -3,7 +3,7 @@
  */
 package com.it.confsys.parser;
 
-import com.it.confsys.model.InputData;
+import com.it.confsys.model.topics.InputData;
 
 /**
  * 

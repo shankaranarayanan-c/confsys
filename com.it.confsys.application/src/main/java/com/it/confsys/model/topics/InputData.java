@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.it.confsys.model;
+package com.it.confsys.model.topics;
 
 /**
  * 

@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import com.it.confsys.model.ConferenceTopics;
-import com.it.confsys.model.InputData;
+import com.it.confsys.model.topics.ConferenceTopics;
+import com.it.confsys.model.topics.InputData;
 import com.it.confsys.util.AppConstants;
 
 /**

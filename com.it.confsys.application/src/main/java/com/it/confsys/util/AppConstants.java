@@ -28,6 +28,12 @@ public final class AppConstants {
 	
 	public static final int NETWORKING_SESSION_MIN_START_TIME = 16;
 	
+	public static final String MORNING_SESSION = "morning";
+	
+	public static final String AFTERNOON_SESSION = "afternoon";
+	
+//	public static final String NETWORKING_SESSION = "networking";
+	
 //	public static final int SESSION_BREAK_TIME = 0;
 	
 }

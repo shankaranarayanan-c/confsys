@@ -1,4 +1,4 @@
-package com.it.confsys.model;
+package com.it.confsys.model.topics;
 
 import java.util.HashMap;
 import java.util.HashSet;
