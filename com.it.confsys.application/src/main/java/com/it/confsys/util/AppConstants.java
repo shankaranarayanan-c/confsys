@@ -32,8 +32,4 @@ public final class AppConstants {
 	
 	public static final String AFTERNOON_SESSION = "afternoon";
 	
-//	public static final String NETWORKING_SESSION = "networking";
-	
-//	public static final int SESSION_BREAK_TIME = 0;
-	
 }

@@ -29,7 +29,7 @@ public class ConferenceScheduler {
 	 * with the given list of topics and durations design the tracks for the conference.
 	 * 
 	 */
-	public void createTracks() {
+	public Conference createTracks() {
 		// Calculate total tracks needed
 		int totalDuration = 0;
 		int totalTracks;
@@ -72,6 +72,7 @@ public class ConferenceScheduler {
 			track.getSessions().put(AppConstants.MORNING_SESSION, morning);
 			track.getSessions().put(AppConstants.AFTERNOON_SESSION, afternoon);
 			
+			System.out.println("created track id: "+ track.getId());
 			conference.getTracks().put(track.getId(), track);
 		}
 		
@@ -125,6 +126,7 @@ public class ConferenceScheduler {
 			displaySessionTopics((PresentationSession) track.getSessions().get(AppConstants.MORNING_SESSION));
 			displaySessionTopics((PresentationSession) track.getSessions().get(AppConstants.AFTERNOON_SESSION));
 		}
+		return conference;
 	}
 
 	private void displaySessionTopics(PresentationSession session) {

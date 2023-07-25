@@ -34,8 +34,13 @@ public class Application {
 		FileParser fileParser = new TopicsTextFileParser(args[0]);
 		InputData parseData = fileParser.parse();
 		
-		ConferenceScheduler conferenceScheduler = new ConferenceScheduler((ConferenceTopics) parseData);
-		conferenceScheduler.createTracks();
+		if(((ConferenceTopics) parseData).getDurations().size() > 0) {
+			ConferenceScheduler conferenceScheduler = new ConferenceScheduler((ConferenceTopics) parseData);
+			conferenceScheduler.createTracks();
+		}else {
+			String msg = "No valid topics found in the given file: "+args[0];
+			LOGGER.log(Level.SEVERE, msg);
+		}
 		
 	}
 

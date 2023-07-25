@@ -3,9 +3,11 @@ package com.it.confsys.appmain;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.it.confsys.handlers.LoggerHandler;
@@ -17,7 +19,7 @@ public class ApplicationTest {
 	@Before
 	public void setup() {
 		loggerHandler = new LoggerHandler();
-		Logger.getLogger(ApplicationTest.class.getName()).addHandler(loggerHandler);
+		Logger.getLogger(Application.class.getName()).addHandler(loggerHandler);
 	}
 	
 	@Test
@@ -46,4 +48,16 @@ public class ApplicationTest {
 		}
 	}
 
+	@Test
+	public void testEmptyInputFile() {
+		String filepath = this.getClass().getResource("/confsys_input_empty.txt").getFile();
+		File inputFile = new File(filepath);
+		
+		String[] args = {inputFile.getAbsolutePath()};
+ 		Application.main(args);
+ 		System.out.println("TestEmotyInputFile: " + loggerHandler.getLogRecords().size());
+ 		assertEquals(Level.SEVERE, loggerHandler.getLogRecords().get(0).getLevel());
+ 		String message = loggerHandler.getLogRecords().get(0).getMessage();
+ 		assertEquals(true, message.startsWith("No valid topics found in the given file:"));
+	}
 }
