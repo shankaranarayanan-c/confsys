@@ -19,6 +19,8 @@ public class ConferenceScheduler {
 	
 	private final static Logger LOGGER = Logger.getLogger(ConferenceScheduler.class.getName());
 	
+	private StringBuilder result = new StringBuilder();
+	
 	private ConferenceTopics topics;
 
 	public ConferenceScheduler(ConferenceTopics conferenceTopics) {
@@ -27,7 +29,8 @@ public class ConferenceScheduler {
 
 	/**
 	 * with the given list of topics and durations design the tracks for the conference.
-	 * 
+	 * Influenced by Depth first. Each sessions are filled with topics before the next
+	 * session is planned.
 	 */
 	public Conference createTracks() {
 		// Calculate total tracks needed
@@ -72,7 +75,6 @@ public class ConferenceScheduler {
 			track.getSessions().put(AppConstants.MORNING_SESSION, morning);
 			track.getSessions().put(AppConstants.AFTERNOON_SESSION, afternoon);
 			
-			System.out.println("created track id: "+ track.getId());
 			conference.getTracks().put(track.getId(), track);
 		}
 		
@@ -117,26 +119,30 @@ public class ConferenceScheduler {
 		
 		
 		
-		//Display conference details
-		System.out.println("*** CONFERENCE SCHEDULE ***");
+		//Populate conference details
+		addToResult("*** CONFERENCE SCHEDULE ***");
 		Map<Integer, Track> tracks = conference.getTracks();
 		for(Integer trackId: conference.getTracks().keySet()) {
-			System.out.println("### Track: "+ trackId+ " ###");
+			addToResult("### Track: "+ trackId+ " ###");
 			Track track = tracks.get(trackId);
 			displaySessionTopics((PresentationSession) track.getSessions().get(AppConstants.MORNING_SESSION));
 			displaySessionTopics((PresentationSession) track.getSessions().get(AppConstants.AFTERNOON_SESSION));
 		}
+		
+		System.out.println(result);
+		
 		return conference;
 	}
 
-	private void displaySessionTopics(PresentationSession session) {
-		System.out.print(session.getName()+" session starttime: "+String.format("%02d", session.getPlannedStartTime().toHours())+":"+String.format("%02d", session.getPlannedStartTime().toMinutesPart()));
-		System.out.println(" endtime: "+String.format("%02d", session.getActualEndTime().toHours())+":"+String.format("%02d", session.getActualEndTime().toMinutesPart()));
+	private void addToResult(String data) {
+		result.append(System.lineSeparator());
+		result.append(data);
+	}
 
+	private void displaySessionTopics(PresentationSession session) {
 		for(Duration startTime : session.getSchedule().keySet()) {
-			System.out.println(String.format("%02d", startTime.toHours())+":"+String.format("%02d", startTime.toMinutesPart())+ "  "+session.getSchedule().get(startTime));
+			addToResult(String.format("%02d", startTime.toHours())+":"+String.format("%02d", startTime.toMinutesPart())+ "  "+session.getSchedule().get(startTime));
 		}
-		System.out.println();
 	}
 
 	private boolean addTopicToSession(Integer duration, String topic, List<PresentationSession> presentationSessions) {
