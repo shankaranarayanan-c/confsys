@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2023 by it Inc. All rights reserved.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * @author shankar
+ */
 package com.it.confsys.scheduler;
 
 import java.time.Duration;
@@ -14,7 +25,11 @@ import com.it.confsys.model.conference.PresentationSession;
 import com.it.confsys.model.conference.Track;
 import com.it.confsys.model.topics.ConferenceTopics;
 import com.it.confsys.util.AppConstants;
-
+/**
+ * This class schedules the conference bases on the given list of valid topics.
+ * This class creates conference which contains tracks. Each track contains
+ * session. The session holds the topics for presentation.
+ */
 public class ConferenceScheduler {
 	
 	private final static Logger LOGGER = Logger.getLogger(ConferenceScheduler.class.getName());
@@ -23,6 +38,10 @@ public class ConferenceScheduler {
 	
 	private ConferenceTopics topics;
 
+	/**
+	 * parameterized constructor which takes the conference topics
+	 * @param conferenceTopics {@link ConferenceTopics}
+	 */
 	public ConferenceScheduler(ConferenceTopics conferenceTopics) {
 		this.topics = conferenceTopics;
 	}
@@ -31,6 +50,8 @@ public class ConferenceScheduler {
 	 * with the given list of topics and durations design the tracks for the conference.
 	 * Influenced by Depth first. Each sessions are filled with topics before the next
 	 * session is planned.
+	 * 
+	 * @return {@link Conference}
 	 */
 	public Conference createTracks() {
 		// Calculate total tracks needed

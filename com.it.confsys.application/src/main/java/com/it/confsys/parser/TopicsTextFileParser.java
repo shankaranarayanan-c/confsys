@@ -1,6 +1,15 @@
 /**
+ * Copyright (c) 2023 by it Inc. All rights reserved.
  * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * @author shankar
  */
+ 
 package com.it.confsys.parser;
 
 import java.io.BufferedReader;
@@ -16,13 +25,17 @@ import com.it.confsys.model.topics.InputData;
 import com.it.confsys.util.AppConstants;
 
 /**
- * 
+ * This is concrete implementation for a text file parser. This looks for the topics along with the duration.
  */
 public class TopicsTextFileParser extends FileParser {
 	
 	private final Logger LOGGER = Logger.getLogger(TopicsTextFileParser.class.getName());
 
 
+	/**
+	 * Inherited parameterized constructor which takes path of the input file
+	 * @param inputFilePath
+	 */
 	public TopicsTextFileParser(String inputFilePath) {
 		super(inputFilePath);
 	}
