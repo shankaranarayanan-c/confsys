@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -16,6 +15,7 @@ import com.it.confsys.handlers.LoggerHandler;
 import com.it.confsys.model.conference.Conference;
 import com.it.confsys.model.conference.PresentationSession;
 import com.it.confsys.model.conference.Session;
+import com.it.confsys.model.conference.Track;
 import com.it.confsys.model.topics.ConferenceTopics;
 import com.it.confsys.util.AppConstants;
 
@@ -59,7 +59,7 @@ public class ConferenceSchedulerTest {
 		Conference conference = conferenceScheduler.createTracks();
 		
 		assertEquals(1, conference.getTracks().size());
-		Map<String, Session> sessions = conference.getTracks().get(2).getSessions();
+		Map<String, Session> sessions = conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions();
 		for(Session session: sessions.values()) {
 			if(session.getName().equals(AppConstants.AFTERNOON_SESSION)){
 				Duration actualEndTime = ((PresentationSession)session).getActualEndTime();
@@ -81,7 +81,7 @@ public class ConferenceSchedulerTest {
 		Conference conference = conferenceScheduler.createTracks();
 		
 		assertEquals(2, conference.getTracks().size());
-		Map<String, Session> sessions = conference.getTracks().get(4).getSessions();
+		Map<String, Session> sessions = conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions();
 		for(Session session: sessions.values()) {
 			if(session.getName().equals(AppConstants.AFTERNOON_SESSION)){
 				Duration actualEndTime = ((PresentationSession)session).getActualEndTime();
@@ -105,8 +105,8 @@ public class ConferenceSchedulerTest {
 		
 		assertEquals(2, conference.getTracks().size());
 		List<Session> sessions = new ArrayList<Session>();
-		sessions.addAll(conference.getTracks().get(5).getSessions().values());
-		sessions.addAll(conference.getTracks().get(6).getSessions().values());
+		sessions.addAll(conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions().values());
+		sessions.addAll(conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-2].getSessions().values());
 		Duration[] networkingTime = new Duration[2];
 		int count = 0;
 		for(Session session: sessions) {
@@ -147,8 +147,8 @@ public class ConferenceSchedulerTest {
 		
 		assertEquals(2, conference.getTracks().size());
 		List<Session> sessions = new ArrayList<Session>();
-		sessions.addAll(conference.getTracks().get(8).getSessions().values());
-		sessions.addAll(conference.getTracks().get(9).getSessions().values());
+		sessions.addAll(conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions().values());
+		sessions.addAll(conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-2].getSessions().values());
 		List<String> expectedEndTimes = new ArrayList<String>();
 		expectedEndTimes.add("PT9H48M");
 		expectedEndTimes.add("PT11H57M");
@@ -175,8 +175,8 @@ public class ConferenceSchedulerTest {
 		
 		assertEquals(1, conference.getTracks().size());
 		int totalTopics=0;
-		Collection<Session> sessions = conference.getTracks().get(10).getSessions().values();
-		for(Session session: sessions) {
+		Map<String, Session> sessions = conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions();
+		for(Session session: sessions.values()) {
 			totalTopics += ((PresentationSession)session).getSchedule().size();
 		}
 		//reduce the lunch and networking event
@@ -200,8 +200,8 @@ public class ConferenceSchedulerTest {
 		
 		assertEquals(1, conference.getTracks().size());
 		int totalTopics=0;
-		Collection<Session> sessions = conference.getTracks().get(11).getSessions().values();
-		for(Session session: sessions) {
+		Map<String, Session> sessions = conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions();
+		for(Session session: sessions.values()) {
 			totalTopics += ((PresentationSession)session).getSchedule().size();
 		}
 		//reduce the lunch and networking event
