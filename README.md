@@ -17,15 +17,22 @@ Each tracks has morning and afternoon session. Mutiple tracks are synced for a n
 
 # Execute
 
-	The applicate expects the topics in a text file. This is passed as an argument to the application.
+	The application expects absolute path to input file as command line arguments. This input file contains the topics along with duration details. To Run,
 
-	ex: java -jar com.it.confsys.application-0.0.1-SNAPSHOT.jar pathToInputFile
+	java -jar com.it.confsys.application-0.0.1-SNAPSHOT.jar pathToInputFile
 
 	The conference schedules are printed in the console. 
 
 # code coverage published to codecov
 
 	https://app.codecov.io/gh/shankaranarayanan-c/confsys
+
+# System Requirements
+	
+	1) Java openjdk 17 64bit
+	2) Apache Maven 3.6.3
+	3) Git 2.34 or higher
+	4) Junit 4.3
 
 
 # Known limitations
@@ -41,3 +48,12 @@ Each tracks has morning and afternoon session. Mutiple tracks are synced for a n
 	9) code coverage is ~92%
 	10) No SCA checks are configured or code formatting standards configured yet.
 	11) 24 hrs time format is followed for the scheduling
+
+
+#Sample Input File contents
+
+	foo 30 mins
+	bar lightning
+	baz 45 mins
+	15 mins foo
+	baz 60 mins
