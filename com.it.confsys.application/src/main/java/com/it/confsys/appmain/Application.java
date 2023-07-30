@@ -14,10 +14,12 @@ package com.it.confsys.appmain;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.it.confsys.model.conference.Conference;
 import com.it.confsys.model.topics.ConferenceTopics;
 import com.it.confsys.model.topics.InputData;
 import com.it.confsys.parser.FileParser;
 import com.it.confsys.parser.TopicsTextFileParser;
+import com.it.confsys.report.ConsoleReporter;
 import com.it.confsys.scheduler.ConferenceScheduler;
 
 /**
@@ -44,7 +46,9 @@ public class Application {
 		
 		if(((ConferenceTopics) parseData).getDurations().size() > 0) {
 			ConferenceScheduler conferenceScheduler = new ConferenceScheduler((ConferenceTopics) parseData);
-			conferenceScheduler.createTracks();
+			Conference conference = conferenceScheduler.scheduleConference();
+			ConsoleReporter reporter = new ConsoleReporter();
+			reporter.display(conference);
 		}else {
 			String msg = "No valid topics found in the given file: "+args[0];
 			LOGGER.log(Level.SEVERE, msg);

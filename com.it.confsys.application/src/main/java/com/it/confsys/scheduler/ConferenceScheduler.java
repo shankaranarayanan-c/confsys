@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,8 +32,6 @@ import com.it.confsys.util.AppConstants;
 public class ConferenceScheduler {
 	
 	private final static Logger LOGGER = Logger.getLogger(ConferenceScheduler.class.getName());
-	
-	private StringBuilder result = new StringBuilder();
 	
 	private ConferenceTopics topics;
 
@@ -53,7 +50,7 @@ public class ConferenceScheduler {
 	 * 
 	 * @return {@link Conference}
 	 */
-	public Conference createTracks() {
+	public Conference scheduleConference() {
 		// Calculate total tracks needed
 		int totalDuration = 0;
 		int totalTracks;
@@ -138,33 +135,9 @@ public class ConferenceScheduler {
 			}
 		}
 		
-		
-		
-		//Populate conference details
-		addToResult("*** CONFERENCE SCHEDULE ***");
-		Map<Integer, Track> tracks = conference.getTracks();
-		for(Integer trackId: conference.getTracks().keySet()) {
-			addToResult("### Track: "+ trackId+ " ###");
-			Track track = tracks.get(trackId);
-			displaySessionTopics((PresentationSession) track.getSessions().get(AppConstants.MORNING_SESSION));
-			displaySessionTopics((PresentationSession) track.getSessions().get(AppConstants.AFTERNOON_SESSION));
-		}
-		
-		System.out.println(result);
-		
 		return conference;
 	}
 
-	private void addToResult(String data) {
-		result.append(System.lineSeparator());
-		result.append(data);
-	}
-
-	private void displaySessionTopics(PresentationSession session) {
-		for(Duration startTime : session.getSchedule().keySet()) {
-			addToResult(String.format("%02d", startTime.toHours())+":"+String.format("%02d", startTime.toMinutesPart())+ "  "+session.getSchedule().get(startTime));
-		}
-	}
 
 	private boolean addTopicToSession(Integer duration, String topic, List<PresentationSession> presentationSessions) {
 		for(PresentationSession presentationSession: presentationSessions) {

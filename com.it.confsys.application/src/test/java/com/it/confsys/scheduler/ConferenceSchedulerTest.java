@@ -43,7 +43,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 60, topics1);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(1, conference.getTracks().size());
 	}
@@ -56,7 +56,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 60, topics3);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(1, conference.getTracks().size());
 		Map<String, Session> sessions = conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions();
@@ -78,7 +78,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 60, topics4);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(2, conference.getTracks().size());
 		Map<String, Session> sessions = conference.getTracks().values().toArray(new Track[conference.getTracks().size()])[conference.getTracks().size()-1].getSessions();
@@ -101,7 +101,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 30, topics1);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(2, conference.getTracks().size());
 		List<Session> sessions = new ArrayList<Session>();
@@ -129,7 +129,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 60, topics3);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(1, conference.getTracks().size());
 	}
@@ -143,7 +143,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 16, topics4);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(2, conference.getTracks().size());
 		List<Session> sessions = new ArrayList<Session>();
@@ -171,7 +171,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 5, topics_restructured_lighning);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(1, conference.getTracks().size());
 		int totalTopics=0;
@@ -196,7 +196,7 @@ public class ConferenceSchedulerTest {
 		mockConferenceTopics(conferenceTopics, 5, topics_lightning);
 		
 		ConferenceScheduler conferenceScheduler = new ConferenceScheduler(conferenceTopics);
-		Conference conference = conferenceScheduler.createTracks();
+		Conference conference = conferenceScheduler.scheduleConference();
 		
 		assertEquals(1, conference.getTracks().size());
 		int totalTopics=0;
