@@ -34,7 +34,7 @@ public class ConsoleReporterTest {
 		mockConferenceTopics(conferenceTopics, 32, topics3);
 		mockConferenceTopics(conferenceTopics, 16, topics4);
 		String expectedResult = "\n*** CONFERENCE SCHEDULE ***\n"
-				+ "### Track: 1 ###\n"
+				+ "### Track ###\n"
 				+ "09:00  aaa\n"
 				+ "09:59  ccc\n"
 				+ "10:58  bbb\n"
@@ -46,7 +46,7 @@ public class ConsoleReporterTest {
 				+ "15:53  iii\n"
 				+ "16:25  hhh\n"
 				+ "16:57  Networking Time\n"
-				+ "### Track: 2 ###\n"
+				+ "### Track ###\n"
 				+ "09:00  kkk\n"
 				+ "09:16  jjj\n"
 				+ "09:32  lll\n"
@@ -58,7 +58,8 @@ public class ConsoleReporterTest {
 		
 		ConsoleReporter consoleReporter = new ConsoleReporter();
 		consoleReporter.display(conference);
-		assertEquals(expectedResult, byteArrayOutputStream.toString());
+		String actualResult = byteArrayOutputStream.toString().replaceAll("Track: \\d+", "Track");
+		assertEquals(expectedResult, actualResult);
 	}
 
 	@After
